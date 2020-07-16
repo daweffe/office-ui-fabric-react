@@ -1,3 +1,4 @@
+import * as d3Sankey from 'd3-sankey';
 export interface IDataPoint {
   /**
    * Independent value of the data point, rendered along the x-axis.
@@ -56,6 +57,18 @@ export interface IChartDataPoint {
    * placeholder data point
    */
   placeHolder?: boolean;
+
+  /**
+   * Callout data for x axis
+   * This is an optional prop, If haven;t given legend will take
+   */
+  xAxisCalloutData?: string;
+
+  /**
+   * Callout data for y axis
+   * This is an optional prop, If haven't given data will take
+   */
+  yAxisCalloutData?: string;
 }
 
 export interface IVerticalBarChartDataPoint {
@@ -80,6 +93,18 @@ export interface IVerticalBarChartDataPoint {
    * color for the legend in the chart
    */
   color?: string;
+
+  /**
+   * Callout data for x axis
+   * This is an optional prop, If haven;t given legend will take
+   */
+  xAxisCalloutData?: string;
+
+  /**
+   * Callout data for y axis
+   * This is an optional prop, If haven't given data will take
+   */
+  yAxisCalloutData?: string;
 }
 
 export interface ILineChartDataPoint {
@@ -94,6 +119,11 @@ export interface ILineChartDataPoint {
    * Dependent value of the data point, rendered along the y-axis.
    */
   y: number;
+
+  /**
+   * Defines the function that is executed on clicking  line
+   */
+  onDataPointClick?: () => void;
 
   /**
    * Callout data for x axis
@@ -148,7 +178,32 @@ export interface IChartProps {
    * data for the points in the line chart
    */
   lineChartData?: ILineChartPoints[];
+
+  /**
+   * data for the points in the line chart
+   */
+  SankeyChartData?: ISankeyChartData;
 }
+
+export interface ISankeyChartData {
+  nodes: SNode[];
+  links: SLink[];
+}
+
+interface ISNodeExtra {
+  nodeId: number | string;
+  name: string;
+  color: string;
+}
+
+interface ISLinkExtra {
+  source: number;
+  target: number;
+  value: number;
+}
+
+export type SNode = d3Sankey.SankeyNode<ISNodeExtra, ISLinkExtra>;
+export type SLink = d3Sankey.SankeyLink<ISNodeExtra, ISLinkExtra>;
 
 export interface IVSChartDataPoint {
   /**
@@ -165,6 +220,18 @@ export interface IVSChartDataPoint {
    * color for the legend in the chart
    */
   color?: string;
+
+  /**
+   * Callout data for x axis
+   * This is an optional prop, If haven;t given legend will take
+   */
+  xAxisCalloutData?: string;
+
+  /**
+   * Callout data for y axis
+   * This is an optional prop, If haven't given data will take
+   */
+  yAxisCalloutData?: string;
 }
 
 export interface IVerticalStackedChartProps {
@@ -204,6 +271,18 @@ export interface IGVBarChartSeriesPoint {
    * Legend text in the chart
    */
   legend: string;
+
+  /**
+   * Callout data for x axis
+   * This is an optional prop, If haven;t given legend will take
+   */
+  xAxisCalloutData?: string;
+
+  /**
+   * Callout data for y axis
+   * This is an optional prop, If haven't given data will take
+   */
+  yAxisCalloutData?: string;
 }
 
 export interface IGroupedVerticalBarChartData {
